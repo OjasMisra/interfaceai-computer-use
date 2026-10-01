@@ -1,0 +1,12 @@
+{
+  "allowed_paths": ["/signon", "/desk", "/banner", "/menu", "/work/*"],
+  "blocked_paths": ["/__admin/*", "/signoff"],
+  "allowed_actions": ["click", "fill", "select", "press", "extract"],
+  "max_steps": 30,
+  "max_seconds": 240,
+  "irreversible": {
+    "discovery": "require_human_approval",
+    "replay": "require_approved_capability_and_human_or_preapproval"
+  },
+  "escalation_timeout_seconds": 600
+}

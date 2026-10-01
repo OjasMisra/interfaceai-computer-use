@@ -1,0 +1,60 @@
+[
+  {
+    "name": "member__lookup_savings_balance",
+    "description": "Look up a member's savings balance. Finds a member by member number and returns the current balance of their primary savings share. Returns {savings_balance: decimal}. May instead return a business outcome: MEMBER_NOT_FOUND (No member exists with that number); INVALID_MEMBER_NUMBER (Host rejected the member number format); ACCESS_RESTRICTED (Restricted (e.g. employee) account; needs supervisor override). Risk: safe.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "member_number": {
+          "description": "Member (account holder) number",
+          "type": "string",
+          "pattern": "^\\d{5,9}$"
+        }
+      },
+      "required": [
+        "member_number"
+      ],
+      "additionalProperties": false
+    },
+    "x-capability": "member.lookup_savings_balance@1.0.0",
+    "x-status": "approved",
+    "x-approved": true
+  },
+  {
+    "name": "member__open_share",
+    "description": "Open a new share (sub-account) for a member. Opens a share of the given type with an opening deposit and returns the confirmation number. Posts a transaction. Returns {confirmation_number: string, share_id: string}. May instead return a business outcome: MEMBER_NOT_FOUND (No member exists with that number); INVALID_MEMBER_NUMBER (Host rejected the member number format); ACCESS_RESTRICTED (Restricted (e.g. employee) account; needs supervisor override); MINIMUM_DEPOSIT_NOT_MET (Opening deposit below the product minimum). Risk: irreversible.",
+    "input_schema": {
+      "type": "object",
+      "properties": {
+        "member_number": {
+          "description": "Member (account holder) number",
+          "type": "string",
+          "pattern": "^\\d{5,9}$"
+        },
+        "opening_deposit": {
+          "description": "Opening deposit amount in USD (decimal as string)",
+          "type": "string",
+          "pattern": "^\\d+(\\.\\d{1,2})?$"
+        },
+        "share_type": {
+          "description": "Type of share to open",
+          "type": "string",
+          "enum": [
+            "SAVINGS",
+            "CLUB",
+            "CERTIFICATE"
+          ]
+        }
+      },
+      "required": [
+        "member_number",
+        "opening_deposit",
+        "share_type"
+      ],
+      "additionalProperties": false
+    },
+    "x-capability": "member.open_share@1.0.0",
+    "x-status": "approved",
+    "x-approved": true
+  }
+]

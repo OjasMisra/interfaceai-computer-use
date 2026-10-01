@@ -1,0 +1,155 @@
+[
+  {
+    "scenario": "01-discovery-lookup-balance",
+    "story": "Mock planner drives the app; a system notice pops up mid-run and is cleared by the profile, not recorded.",
+    "status": "succeeded",
+    "detail": "member.lookup_savings_balance@1.0.0",
+    "check": "PASS",
+    "run": "runs/01-discovery-lookup-balance",
+    "command": "python -m cua discover --goal \"Look up member 10042 and read their current savings balance\" --fault system_notice@/work/inquiry --operator none"
+  },
+  {
+    "scenario": "02-discovery-open-share",
+    "story": "Planner proposes the irreversible Post; policy pauses for a human approval; artifact marks the step.",
+    "status": "succeeded",
+    "detail": "member.open_share@1.0.0",
+    "check": "PASS",
+    "run": "runs/02-discovery-open-share",
+    "command": "python -m cua discover --goal \"Open a new savings share for member 10042 with an opening deposit of $50.00 and get the confirmation number\" --operator sim:approve"
+  },
+  {
+    "scenario": "03-replay-success",
+    "story": "Different member than recorded; savings row is 3rd, not 1st. Row-key targeting reads the right cell.",
+    "status": "succeeded",
+    "detail": "savings_balance=\u00abok\u00bb",
+    "check": "PASS",
+    "run": "runs/03-replay-success",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=10077 --operator none"
+  },
+  {
+    "scenario": "04-replay-not-found",
+    "story": "A legitimate answer, not a failure.",
+    "status": "business_outcome",
+    "detail": "MEMBER_NOT_FOUND",
+    "check": "PASS",
+    "run": "runs/04-replay-not-found",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=99999 --operator none"
+  },
+  {
+    "scenario": "05-replay-restricted",
+    "story": "Permission denial surfaced as a business outcome.",
+    "status": "business_outcome",
+    "detail": "ACCESS_RESTRICTED",
+    "check": "PASS",
+    "run": "runs/05-replay-restricted",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=10013 --operator none"
+  },
+  {
+    "scenario": "06-replay-bad-input",
+    "story": "Rejected by the input contract before a browser starts.",
+    "status": "rejected",
+    "detail": "INPUT_INVALID",
+    "check": "PASS",
+    "run": "runs/06-replay-bad-input",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=12AB --operator none"
+  },
+  {
+    "scenario": "07-replay-session-timeout",
+    "story": "Host session expires mid-flow; profile handler re-authenticates, engine repositions.",
+    "status": "succeeded",
+    "detail": "savings_balance=\u00abok\u00bb; recovered: session_timeout",
+    "check": "PASS",
+    "run": "runs/07-replay-session-timeout",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=10042 --fault session_expired@/work/member --operator none"
+  },
+  {
+    "scenario": "08-replay-slow-host",
+    "story": "'PROCESSING - PLEASE WAIT' interim page is waited out, not treated as an error.",
+    "status": "succeeded",
+    "detail": "savings_balance=\u00abok\u00bb; recovered: processing",
+    "check": "PASS",
+    "run": "runs/08-replay-slow-host",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=10042 --fault processing@/work/member --operator none"
+  },
+  {
+    "scenario": "09-replay-system-notice",
+    "story": "Broadcast overlay blocking the screen is acknowledged and the flow continues.",
+    "status": "succeeded",
+    "detail": "savings_balance=\u00abok\u00bb; recovered: system_notice",
+    "check": "PASS",
+    "run": "runs/09-replay-system-notice",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=10042 --fault system_notice@/work/member --operator none"
+  },
+  {
+    "scenario": "10-replay-app-abend",
+    "story": "Hard failure: step, expected vs observed, masked screenshot.",
+    "status": "failed",
+    "detail": "APP_ABEND",
+    "check": "PASS",
+    "run": "runs/10-replay-app-abend",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=10042 --fault abend@/work/member --operator none"
+  },
+  {
+    "scenario": "11-replay-unknown-state-handoff",
+    "story": "Unrecognised security screen -> human takes the live session over CDP, clicks through, hands back.",
+    "status": "succeeded",
+    "detail": "savings_balance=\u00abok\u00bb; human: unexpected_state->resume",
+    "check": "PASS",
+    "run": "runs/11-replay-unknown-state-handoff",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=10042 --fault security_check@/work/member --operator sim:verify_identity"
+  },
+  {
+    "scenario": "12-replay-unknown-state-no-operator",
+    "story": "Same situation with nobody on call: fails closed.",
+    "status": "failed",
+    "detail": "UNEXPECTED_STATE",
+    "check": "PASS",
+    "run": "runs/12-replay-unknown-state-no-operator",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant acme-fcu --input member_number=10042 --fault security_check@/work/member --operator none"
+  },
+  {
+    "scenario": "13-replay-open-share-human-approval",
+    "story": "Irreversible Post waits for a human approval.",
+    "status": "succeeded",
+    "detail": "confirmation_number=\u00abok\u00bb, share_id=\u00abok\u00bb; human: approval->approve",
+    "check": "PASS",
+    "run": "runs/13-replay-open-share-human-approval",
+    "command": "python -m cua replay member.open_share --tenant acme-fcu --input member_number=10077 --input share_type=CLUB --input opening_deposit=25 --operator sim:approve"
+  },
+  {
+    "scenario": "14-replay-open-share-no-approver",
+    "story": "No approver and no pre-approval: nothing is posted.",
+    "status": "failed",
+    "detail": "APPROVAL_REQUIRED",
+    "check": "PASS",
+    "run": "runs/14-replay-open-share-no-approver",
+    "command": "python -m cua replay member.open_share --tenant acme-fcu --input member_number=10077 --input share_type=CLUB --input opening_deposit=25 --operator none"
+  },
+  {
+    "scenario": "15-replay-open-share-min-deposit",
+    "story": "Host-side validation error is a business outcome the caller can act on.",
+    "status": "business_outcome",
+    "detail": "MINIMUM_DEPOSIT_NOT_MET",
+    "check": "PASS",
+    "run": "runs/15-replay-open-share-min-deposit",
+    "command": "python -m cua replay member.open_share --tenant acme-fcu --input member_number=10077 --input share_type=CLUB --input opening_deposit=1 --operator none --approve click_post"
+  },
+  {
+    "scenario": "16-replay-tenant-b-unconfigured",
+    "story": "Same vendor app, relabelled by tenant B. Fallback strategies carry it; drift report says what to override.",
+    "status": "succeeded",
+    "detail": "savings_balance=\u00abok\u00bb; drift: 2",
+    "check": "PASS",
+    "run": "runs/16-replay-tenant-b-unconfigured",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant harbor-cu-unconfigured --input member_number=10077 --operator none"
+  },
+  {
+    "scenario": "17-replay-tenant-b-overrides",
+    "story": "Tenant overlay applied: same artifact, no drift.",
+    "status": "succeeded",
+    "detail": "savings_balance=\u00abok\u00bb",
+    "check": "PASS",
+    "run": "runs/17-replay-tenant-b-overrides",
+    "command": "python -m cua replay member.lookup_savings_balance --tenant harbor-cu --input member_number=10077 --operator none"
+  }
+]

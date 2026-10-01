@@ -1,0 +1,34 @@
+{
+  "id": "harbor-cu",
+  "name": "Harbor Community CU (demo tenant B, same vendor product, configured differently)",
+  "profile": "acme-coreone",
+  "profile_version": "4",
+  "base_url": "http://127.0.0.1:5056",
+  "secrets": {
+    "operator_id": "HARBOR_CU_OPERATOR_ID",
+    "operator_password": "HARBOR_CU_OPERATOR_PASSWORD"
+  },
+  "target_overrides": {
+    "member_inquiry.member_number": {
+      "reason": "Harbor relabelled the member-number field 'Account No.' in their CoreOne config",
+      "strategies": [
+        {
+          "kind": "role_label",
+          "role": "textbox",
+          "label": "Account No."
+        }
+      ]
+    },
+    "member_detail.shares": {
+      "reason": "Harbor renamed the Shares tab to 'Accounts'",
+      "strategies": [
+        {
+          "kind": "role_name",
+          "role": "link",
+          "name": "Accounts"
+        }
+      ]
+    }
+  },
+  "mock_variant": "harbor"
+}

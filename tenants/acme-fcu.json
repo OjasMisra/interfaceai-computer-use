@@ -1,0 +1,12 @@
+{
+  "id": "acme-fcu",
+  "name": "Acme Federal Credit Union (demo tenant A)",
+  "profile": "acme-coreone",
+  "profile_version": "4",
+  "base_url": "http://127.0.0.1:5055",
+  "secrets": {
+    "operator_id": "ACME_FCU_OPERATOR_ID",
+    "operator_password": "ACME_FCU_OPERATOR_PASSWORD"
+  },
+  "mock_variant": "acme"
+}

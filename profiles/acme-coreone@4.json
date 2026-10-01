@@ -1,0 +1,318 @@
+{
+  "id": "acme-coreone",
+  "version": "4",
+  "product": "Acme CoreOne Teller 4.x (fictional vendor core)",
+  "surface": "web",
+  "primary_frame": [
+    "work"
+  ],
+  "entry_path": "/desk",
+  "session": {
+    "signon_path": "/signon",
+    "success_screen": "teller_home",
+    "steps": [
+      {
+        "action": "fill",
+        "value": "{{secrets.operator_id}}",
+        "target": {
+          "key": "signon.operator_id",
+          "frame": [],
+          "strategies": [
+            {
+              "kind": "role_label",
+              "role": "textbox",
+              "label": "Operator ID"
+            },
+            {
+              "kind": "attribute",
+              "role": "textbox",
+              "attr": "name",
+              "value": "f_0001"
+            }
+          ]
+        }
+      },
+      {
+        "action": "fill",
+        "value": "{{secrets.operator_password}}",
+        "target": {
+          "key": "signon.password",
+          "frame": [],
+          "strategies": [
+            {
+              "kind": "role_label",
+              "role": "textbox",
+              "label": "Password"
+            },
+            {
+              "kind": "attribute",
+              "role": "textbox",
+              "attr": "name",
+              "value": "f_0002"
+            }
+          ]
+        }
+      },
+      {
+        "action": "click",
+        "target": {
+          "key": "signon.submit",
+          "frame": [],
+          "strategies": [
+            {
+              "kind": "role_name",
+              "role": "button",
+              "name": "Sign On"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "screens": [
+    {
+      "id": "signon",
+      "match": {
+        "all": [
+          "OPERATOR SIGN ON"
+        ]
+      }
+    },
+    {
+      "id": "teller_home",
+      "match": {
+        "all": [
+          "TELLER HOME",
+          "WELCOME TO COREONE TELLER"
+        ]
+      }
+    },
+    {
+      "id": "member_inquiry",
+      "match": {
+        "all": [
+          "MEMBER INQUIRY"
+        ]
+      }
+    },
+    {
+      "id": "member_detail",
+      "match": {
+        "all": [
+          "MEMBER DETAIL"
+        ]
+      }
+    },
+    {
+      "id": "member_shares",
+      "match": {
+        "all": [
+          "MEMBER SHARES"
+        ]
+      }
+    },
+    {
+      "id": "open_share",
+      "match": {
+        "all": [
+          "OPEN NEW SHARE"
+        ]
+      }
+    },
+    {
+      "id": "verify_share",
+      "match": {
+        "all": [
+          "VERIFY NEW SHARE"
+        ]
+      }
+    },
+    {
+      "id": "share_opened",
+      "match": {
+        "all": [
+          "SHARE OPENED"
+        ]
+      }
+    }
+  ],
+  "interstitials": [
+    {
+      "id": "system_notice",
+      "description": "Broadcast notice overlay that blocks the screen until acknowledged",
+      "match": {
+        "all": [
+          "SYSTEM NOTICE"
+        ]
+      },
+      "handler": "act",
+      "steps": [
+        {
+          "action": "click",
+          "target": {
+            "key": "notice.ok",
+            "frame": [
+              "work"
+            ],
+            "strategies": [
+              {
+                "kind": "role_name",
+                "role": "button",
+                "name": "OK"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "processing",
+      "description": "Interim page shown while the host is slow; refreshes itself",
+      "match": {
+        "any": [
+          "PROCESSING - PLEASE WAIT"
+        ]
+      },
+      "handler": "wait",
+      "max_wait_ms": 15000
+    },
+    {
+      "id": "session_timeout",
+      "description": "Idle/host session expiry with inline re-authentication",
+      "match": {
+        "all": [
+          "SESSION TIMED OUT"
+        ]
+      },
+      "handler": "act",
+      "max_occurrences": 2,
+      "steps": [
+        {
+          "action": "fill",
+          "value": "{{secrets.operator_id}}",
+          "target": {
+            "key": "reauth.operator_id",
+            "frame": [
+              "work"
+            ],
+            "strategies": [
+              {
+                "kind": "role_label",
+                "role": "textbox",
+                "label": "Operator ID"
+              }
+            ]
+          }
+        },
+        {
+          "action": "fill",
+          "value": "{{secrets.operator_password}}",
+          "target": {
+            "key": "reauth.password",
+            "frame": [
+              "work"
+            ],
+            "strategies": [
+              {
+                "kind": "role_label",
+                "role": "textbox",
+                "label": "Password"
+              }
+            ]
+          }
+        },
+        {
+          "action": "click",
+          "target": {
+            "key": "reauth.submit",
+            "frame": [
+              "work"
+            ],
+            "strategies": [
+              {
+                "kind": "role_name",
+                "role": "button",
+                "name": "Resume Session"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "id": "abend",
+      "code": "APP_ABEND",
+      "description": "Host transaction abended; needs help-desk, not a retry",
+      "match": {
+        "regex": "TRANSACTION ABENDED \\(CODE (\\w+)\\)"
+      },
+      "retryable": false
+    }
+  ],
+  "outcomes": [
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "description": "No member exists with that number",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "NO RECORD FOUND FOR MEMBER"
+    },
+    {
+      "code": "INVALID_MEMBER_NUMBER",
+      "description": "Host rejected the member number format",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "INVALID MEMBER NUMBER"
+    },
+    {
+      "code": "ACCESS_RESTRICTED",
+      "description": "Restricted (e.g. employee) account; needs supervisor override",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "ACCESS DENIED - RESTRICTED ACCOUNT"
+    },
+    {
+      "code": "MINIMUM_DEPOSIT_NOT_MET",
+      "description": "Opening deposit below the product minimum",
+      "screens": [
+        "open_share"
+      ],
+      "regex": "MINIMUM OPENING DEPOSIT IS"
+    }
+  ],
+  "risk_rules": [
+    {
+      "role": "button",
+      "name_regex": "^(post|submit|confirm|transfer|approve|delete|close)\\b",
+      "risk": "irreversible"
+    },
+    {
+      "role": "button",
+      "name_regex": "^(inquire|search|ok)$",
+      "risk": "safe"
+    }
+  ],
+  "sensitive_labels": [
+    "Name",
+    "SSN",
+    "Birth Date",
+    "Address",
+    "Phone",
+    "Opening Deposit",
+    "Deposit"
+  ],
+  "sensitive_patterns": [
+    "\\b\\d{3}-\\d{2}-\\d{4}\\b",
+    "\\(\\d{3}\\) \\d{3}-\\d{4}",
+    "\\b\\d{2}/\\d{2}/\\d{4}\\b"
+  ],
+  "sensitive_columns": [
+    "Balance",
+    "Available"
+  ]
+}

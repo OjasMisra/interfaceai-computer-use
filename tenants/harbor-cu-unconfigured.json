@@ -1,0 +1,13 @@
+{
+  "id": "harbor-cu-unconfigured",
+  "name": "Harbor Community CU before any overrides were written (shows graceful degradation)",
+  "profile": "acme-coreone",
+  "profile_version": "4",
+  "base_url": "http://127.0.0.1:5056",
+  "secrets": {
+    "operator_id": "HARBOR_CU_OPERATOR_ID",
+    "operator_password": "HARBOR_CU_OPERATOR_PASSWORD"
+  },
+  "target_overrides": {},
+  "mock_variant": "harbor"
+}

@@ -1,0 +1,14 @@
+[project]
+name = "cua-bank-automation"
+version = "0.1.0"
+description = "Computer-use automation for legacy banking apps: LLM discovery -> typed capability -> deterministic replay"
+requires-python = ">=3.11"
+dependencies = ["playwright>=1.50", "pydantic>=2.7", "flask>=3.0"]
+
+[project.optional-dependencies]
+claude = ["anthropic>=1.0"]
+dev = ["pytest>=8"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = ["e2e: drives a real browser against the local mock bank"]
