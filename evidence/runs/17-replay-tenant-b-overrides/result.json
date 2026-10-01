@@ -1,0 +1,22 @@
+{
+  "run_id": "replay-20261001T161725Z-cb31",
+  "capability": "member.lookup_savings_balance@1.0.0",
+  "tenant": "harbor-cu",
+  "status": "succeeded",
+  "outputs": {
+    "savings_balance": "\u00absavings_balance\u00bb"
+  },
+  "outcome": null,
+  "failure": null,
+  "recoveries": [],
+  "interventions": [],
+  "drift": [],
+  "overrides_applied": [
+    "member_detail.shares: Harbor renamed the Shares tab to 'Accounts'",
+    "member_inquiry.member_number: Harbor relabelled the member-number field 'Account No.' in their CoreOne config"
+  ],
+  "human_assisted": false,
+  "steps_completed": 5,
+  "duration_ms": 2546,
+  "evidence_dir": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161725Z-cb31"
+}

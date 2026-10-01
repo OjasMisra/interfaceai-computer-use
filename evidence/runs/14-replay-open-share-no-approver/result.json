@@ -1,0 +1,30 @@
+{
+  "run_id": "replay-20261001T161716Z-8087",
+  "capability": "member.open_share@1.0.0",
+  "tenant": "acme-fcu",
+  "status": "failed",
+  "outputs": {},
+  "outcome": null,
+  "failure": {
+    "code": "APPROVAL_REQUIRED",
+    "message": "irreversible step needs a human approval or --approve",
+    "step_id": "click_post",
+    "step_index": 7,
+    "step_intent": "Click the 'Post' button",
+    "expected": null,
+    "observed": null,
+    "retryable": false,
+    "evidence": [
+      "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161716Z-8087\\evidence\\02-failure-approval_required.png",
+      "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161716Z-8087\\evidence\\02-failure-approval_required.snapshot.json"
+    ]
+  },
+  "recoveries": [],
+  "interventions": [],
+  "drift": [],
+  "overrides_applied": [],
+  "human_assisted": false,
+  "steps_completed": 7,
+  "duration_ms": 3000,
+  "evidence_dir": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161716Z-8087"
+}

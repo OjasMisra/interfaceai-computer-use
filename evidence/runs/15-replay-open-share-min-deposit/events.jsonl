@@ -1,0 +1,19 @@
+{"seq": 1, "ts": "2026-10-01T16:17:20.148+00:00", "type": "replay_started", "capability": "member.open_share@1.0.0", "status": "approved", "tenant": "acme-fcu", "inputs": {"member_number": "\u00abmember_number\u00bb", "opening_deposit": "\u00abopening_deposit\u00bb", "share_type": "\u00abshare_type\u00bb"}, "overrides": [], "preapproved": ["click_post"]}
+{"seq": 2, "ts": "2026-10-01T16:17:20.960+00:00", "type": "session_started", "tenant": "acme-fcu", "profile": "acme-coreone@4", "cdp_endpoint": "http://127.0.0.1:50129", "operator_console": null}
+{"seq": 3, "ts": "2026-10-01T16:17:21.550+00:00", "type": "signed_on", "screen": "teller_home"}
+{"seq": 4, "ts": "2026-10-01T16:17:21.564+00:00", "type": "step_action", "index": 0, "step": "click_member_inquiry", "action": "click", "target": "teller_home.member_inquiry", "strategy": "role_name", "value_template": null, "risk": "safe"}
+{"seq": 5, "ts": "2026-10-01T16:17:21.837+00:00", "type": "step_completed", "index": 0, "step": "click_member_inquiry"}
+{"seq": 6, "ts": "2026-10-01T16:17:21.851+00:00", "type": "step_action", "index": 1, "step": "enter_member_number", "action": "fill", "target": "member_inquiry.member_number", "strategy": "role_label", "value_template": "{{inputs.member_number}}", "risk": "safe"}
+{"seq": 7, "ts": "2026-10-01T16:17:21.909+00:00", "type": "step_completed", "index": 1, "step": "enter_member_number"}
+{"seq": 8, "ts": "2026-10-01T16:17:21.923+00:00", "type": "step_action", "index": 2, "step": "click_inquire", "action": "click", "target": "member_inquiry.inquire", "strategy": "role_name", "value_template": null, "risk": "safe"}
+{"seq": 9, "ts": "2026-10-01T16:17:22.138+00:00", "type": "step_completed", "index": 2, "step": "click_inquire"}
+{"seq": 10, "ts": "2026-10-01T16:17:22.158+00:00", "type": "step_action", "index": 3, "step": "click_open_share", "action": "click", "target": "member_detail.open_share", "strategy": "role_name", "value_template": null, "risk": "safe"}
+{"seq": 11, "ts": "2026-10-01T16:17:22.391+00:00", "type": "step_completed", "index": 3, "step": "click_open_share"}
+{"seq": 12, "ts": "2026-10-01T16:17:22.409+00:00", "type": "step_action", "index": 4, "step": "choose_share_type", "action": "select", "target": "open_share.share_type", "strategy": "role_label", "value_template": "{{inputs.share_type}}", "risk": "safe"}
+{"seq": 13, "ts": "2026-10-01T16:17:22.478+00:00", "type": "step_completed", "index": 4, "step": "choose_share_type"}
+{"seq": 14, "ts": "2026-10-01T16:17:22.491+00:00", "type": "step_action", "index": 5, "step": "enter_opening_deposit", "action": "fill", "target": "open_share.opening_deposit", "strategy": "role_label", "value_template": "{{inputs.opening_deposit}}", "risk": "safe"}
+{"seq": 15, "ts": "2026-10-01T16:17:22.516+00:00", "type": "step_completed", "index": 5, "step": "enter_opening_deposit"}
+{"seq": 16, "ts": "2026-10-01T16:17:22.531+00:00", "type": "step_action", "index": 6, "step": "click_continue", "action": "click", "target": "open_share.continue", "strategy": "role_name", "value_template": null, "risk": "reversible"}
+{"seq": 17, "ts": "2026-10-01T16:17:22.774+00:00", "type": "business_outcome", "code": "MINIMUM_DEPOSIT_NOT_MET", "message": "MINIMUM OPENING DEPOSIT IS 5.00", "step": "click_continue"}
+{"seq": 18, "ts": "2026-10-01T16:17:22.963+00:00", "type": "evidence_captured", "tag": "outcome-minimum_deposit_not_met", "screenshot": "evidence\\01-outcome-minimum_deposit_not_met.png", "snapshot": "evidence\\01-outcome-minimum_deposit_not_met.snapshot.json"}
+{"seq": 19, "ts": "2026-10-01T16:17:22.964+00:00", "type": "replay_finished", "status": "business_outcome", "outcome": {"code": "MINIMUM_DEPOSIT_NOT_MET", "description": "Opening deposit below the product minimum", "message": "MINIMUM OPENING DEPOSIT IS 5.00"}, "failure": null, "outputs": {}, "recoveries": 0, "drift": 0, "duration_ms": 2828}

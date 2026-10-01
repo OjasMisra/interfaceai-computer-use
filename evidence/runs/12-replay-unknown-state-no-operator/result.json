@@ -1,0 +1,43 @@
+{
+  "run_id": "replay-20261001T161658Z-c6ee",
+  "capability": "member.lookup_savings_balance@1.0.0",
+  "tenant": "acme-fcu",
+  "status": "failed",
+  "outputs": {},
+  "outcome": null,
+  "failure": {
+    "code": "UNEXPECTED_STATE",
+    "message": "step click_inquire: unrecognised state",
+    "step_id": "click_inquire",
+    "step_index": 2,
+    "step_intent": "Click the 'Inquire' button",
+    "expected": {
+      "screen": "member_detail"
+    },
+    "observed": {
+      "kind": "unknown",
+      "screen": null,
+      "interstitial": null,
+      "error": null,
+      "outcome": null,
+      "headline": [
+        "SECURITY VERIFICATION OPR \u00absecret:operator_id\u00bb",
+        "VERIFY MEMBER IDENTITY BEFORE VIEWING ACCOUNT DETAILS.",
+        "ASK THE MEMBER FOR THEIR SECURITY WORD AND CONFIRM IT MATCHES THE CARD ON FILE."
+      ]
+    },
+    "retryable": false,
+    "evidence": [
+      "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161658Z-c6ee\\evidence\\02-failure-unexpected_state.png",
+      "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161658Z-c6ee\\evidence\\02-failure-unexpected_state.snapshot.json"
+    ]
+  },
+  "recoveries": [],
+  "interventions": [],
+  "drift": [],
+  "overrides_applied": [],
+  "human_assisted": false,
+  "steps_completed": 2,
+  "duration_ms": 12687,
+  "evidence_dir": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161658Z-c6ee"
+}

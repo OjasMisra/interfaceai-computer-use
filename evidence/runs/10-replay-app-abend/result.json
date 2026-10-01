@@ -1,0 +1,43 @@
+{
+  "run_id": "replay-20261001T161637Z-7ea4",
+  "capability": "member.lookup_savings_balance@1.0.0",
+  "tenant": "acme-fcu",
+  "status": "failed",
+  "outputs": {},
+  "outcome": null,
+  "failure": {
+    "code": "APP_ABEND",
+    "message": "Host transaction abended; needs help-desk, not a retry: TRANSACTION ABENDED (CODE S0C7)",
+    "step_id": "click_inquire",
+    "step_index": 2,
+    "step_intent": "Click the 'Inquire' button",
+    "expected": {
+      "screen": "member_detail"
+    },
+    "observed": {
+      "kind": "error",
+      "screen": null,
+      "interstitial": null,
+      "error": "APP_ABEND",
+      "outcome": null,
+      "headline": [
+        "SYSTEM ERROR OPR \u00absecret:operator_id\u00bb",
+        "SYSTEM ERROR - TRANSACTION ABENDED (CODE S0C7)",
+        "CONTACT THE HELP DESK AT EXT 4400. REFERENCE: TXN-88412."
+      ]
+    },
+    "retryable": false,
+    "evidence": [
+      "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161637Z-7ea4\\evidence\\01-failure-app_abend.png",
+      "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161637Z-7ea4\\evidence\\01-failure-app_abend.snapshot.json"
+    ]
+  },
+  "recoveries": [],
+  "interventions": [],
+  "drift": [],
+  "overrides_applied": [],
+  "human_assisted": false,
+  "steps_completed": 2,
+  "duration_ms": 2250,
+  "evidence_dir": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161637Z-7ea4"
+}

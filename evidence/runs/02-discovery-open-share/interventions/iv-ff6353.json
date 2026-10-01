@@ -1,0 +1,39 @@
+{
+  "id": "iv-ff6353",
+  "run_id": "discovery-20261001T161613Z-3216",
+  "kind": "approval",
+  "reason": "planner wants to click 'Post': 'Post' is an irreversible button action",
+  "context": {
+    "goal": "Open a new savings share for member \u00abmember_number\u00bb with an opening deposit of $\u00abopening_deposit\u00bb and get the confirmation number",
+    "turn": 8,
+    "rationale": "Details match the goal; post the new share.",
+    "observed": {
+      "kind": "screen",
+      "screen": "verify_share",
+      "interstitial": null,
+      "error": null,
+      "outcome": null,
+      "headline": [
+        "VERIFY NEW SHARE OPR \u00absecret:operator_id\u00bb",
+        "PLEASE VERIFY THE FOLLOWING BEFORE POSTING.",
+        "Member \u00abmember_number\u00bb"
+      ]
+    }
+  },
+  "screenshot": "C:\\Users\\misra\\cua-bank-automation\\runs\\discovery-20261001T161613Z-3216\\evidence\\01-escalation-approval.png",
+  "snapshot": "C:\\Users\\misra\\cua-bank-automation\\runs\\discovery-20261001T161613Z-3216\\evidence\\01-escalation-approval.snapshot.json",
+  "cdp_endpoint": "http://127.0.0.1:53356",
+  "allowed_decisions": [
+    "approve",
+    "resume",
+    "abort"
+  ],
+  "status": "resolved",
+  "created_at": "2026-10-01T16:16:17.030594Z",
+  "claimed_by": "sim-operator (scripted)",
+  "claimed_at": "2026-10-01T16:16:18.968978Z",
+  "decision": "approve",
+  "note": "Reviewed member, share type and deposit on the verify screen. Approved.",
+  "resolved_at": "2026-10-01T16:16:18.995621Z",
+  "human_actions": []
+}

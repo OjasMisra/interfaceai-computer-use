@@ -1,0 +1,21 @@
+{
+  "run_id": "replay-20261001T161720Z-9c1f",
+  "capability": "member.open_share@1.0.0",
+  "tenant": "acme-fcu",
+  "status": "business_outcome",
+  "outputs": {},
+  "outcome": {
+    "code": "MINIMUM_DEPOSIT_NOT_MET",
+    "description": "Opening deposit below the product minimum",
+    "message": "MINIMUM OPENING DEPOSIT IS 5.00"
+  },
+  "failure": null,
+  "recoveries": [],
+  "interventions": [],
+  "drift": [],
+  "overrides_applied": [],
+  "human_assisted": false,
+  "steps_completed": 6,
+  "duration_ms": 2828,
+  "evidence_dir": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161720Z-9c1f"
+}

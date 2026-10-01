@@ -1,0 +1,277 @@
+{
+  "schema": "cua.capability/v1",
+  "id": "member.lookup_savings_balance",
+  "version": "1.0.0",
+  "title": "Look up a member's savings balance",
+  "description": "Finds a member by member number and returns the current balance of their primary savings share.",
+  "status": "draft",
+  "app": {
+    "profile": "acme-coreone",
+    "profile_version": "4",
+    "surface": "web",
+    "start_screen": "teller_home"
+  },
+  "inputs": [
+    {
+      "name": "member_number",
+      "type": "string",
+      "description": "Member (account holder) number",
+      "required": true,
+      "pattern": "\\d{5,9}",
+      "enum": null,
+      "minimum": null,
+      "sensitivity": "pii"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "savings_balance",
+      "type": "decimal",
+      "description": "Current balance of the SAVINGS share, USD",
+      "required": true,
+      "sensitivity": "pii"
+    }
+  ],
+  "secrets": [],
+  "outcomes": [
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "description": "No member exists with that number",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "NO RECORD FOUND FOR MEMBER"
+    },
+    {
+      "code": "INVALID_MEMBER_NUMBER",
+      "description": "Host rejected the member number format",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "INVALID MEMBER NUMBER"
+    },
+    {
+      "code": "ACCESS_RESTRICTED",
+      "description": "Restricted (e.g. employee) account; needs supervisor override",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "ACCESS DENIED - RESTRICTED ACCOUNT"
+    }
+  ],
+  "screens": [],
+  "steps": [
+    {
+      "id": "click_member_inquiry",
+      "intent": "Click the 'Member Inquiry' link",
+      "screen": "teller_home",
+      "action": "click",
+      "target": {
+        "key": "teller_home.member_inquiry",
+        "frame": [
+          "menu"
+        ],
+        "strategies": [
+          {
+            "kind": "role_name",
+            "role": "link",
+            "name": "Member Inquiry",
+            "why": "accessible name; what an operator reads, stable across layout changes"
+          },
+          {
+            "kind": "attribute",
+            "role": "link",
+            "attr": "href",
+            "value": "/work/inquiry",
+            "why": "canonical route with record ids parameterised"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > table > tbody > tr:nth-of-type(2) > td > a",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "value": null,
+      "output": null,
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "screen",
+          "screen": "member_inquiry"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "enter_member_number",
+      "intent": "Enter {{inputs.member_number}} in 'Member Number'",
+      "screen": "member_inquiry",
+      "action": "fill",
+      "target": {
+        "key": "member_inquiry.member_number",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_label",
+            "role": "textbox",
+            "label": "Member Number",
+            "why": "no accessible name (table layout); label is the text in the adjacent cell"
+          },
+          {
+            "kind": "attribute",
+            "role": "textbox",
+            "attr": "name",
+            "value": "f_0012",
+            "why": "server-generated field name: opaque but fixed per product version"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > form > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2) > input",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "value": "{{inputs.member_number}}",
+      "output": null,
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "field_equals",
+          "value": "{{inputs.member_number}}",
+          "target": null
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "click_inquire",
+      "intent": "Click the 'Inquire' button",
+      "screen": "member_inquiry",
+      "action": "click",
+      "target": {
+        "key": "member_inquiry.inquire",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_name",
+            "role": "button",
+            "name": "Inquire",
+            "why": "accessible name; what an operator reads, stable across layout changes"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > form > table > tbody > tr:nth-of-type(3) > td:nth-of-type(2) > input:nth-of-type(1)",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "value": null,
+      "output": null,
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "screen",
+          "screen": "member_detail"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "click_shares",
+      "intent": "Click the 'Shares' link",
+      "screen": "member_detail",
+      "action": "click",
+      "target": {
+        "key": "member_detail.shares",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_name",
+            "role": "link",
+            "name": "Shares",
+            "why": "accessible name; what an operator reads, stable across layout changes"
+          },
+          {
+            "kind": "attribute",
+            "role": "link",
+            "attr": "href",
+            "value": "/work/member/{{inputs.member_number}}/shares",
+            "why": "canonical route with record ids parameterised"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > a:nth-of-type(2)",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "value": null,
+      "output": null,
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "screen",
+          "screen": "member_shares"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "read_savings_balance",
+      "intent": "Read savings_balance from column 'Balance' of the row where {'Type': 'SAVINGS'}",
+      "screen": "member_shares",
+      "action": "extract",
+      "target": {
+        "key": "member_shares.savings_balance",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "table_cell",
+            "headers_include": [
+              "Share",
+              "Type",
+              "Description",
+              "Balance",
+              "Available"
+            ],
+            "row_match": {
+              "Type": "SAVINGS"
+            },
+            "column": "Balance",
+            "why": "row addressed by its key column(s) ['Type'], not position: row order varies per record"
+          }
+        ]
+      },
+      "value": null,
+      "output": "savings_balance",
+      "risk": "safe",
+      "expect": [],
+      "timeout_ms": 10000
+    }
+  ],
+  "success": [
+    {
+      "kind": "screen",
+      "screen": "member_shares"
+    }
+  ],
+  "provenance": {
+    "discovery_run_id": "discovery-20261001T161610Z-bf5d",
+    "goal": "Look up member \u00abmember_number\u00bb and read their current savings balance",
+    "planner": "mock-heuristic-planner/1",
+    "recorded_at": "2026-10-01T16:16:13.706504Z",
+    "recorded_on_tenant": "acme-fcu",
+    "compiler": "cua-compiler/1",
+    "notes": []
+  },
+  "approvals": []
+}

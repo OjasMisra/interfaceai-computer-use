@@ -1,0 +1,17 @@
+{"seq": 1, "ts": "2026-10-01T16:16:34.971+00:00", "type": "replay_started", "capability": "member.lookup_savings_balance@1.0.0", "status": "approved", "tenant": "acme-fcu", "inputs": {"member_number": "\u00abmember_number\u00bb"}, "overrides": [], "preapproved": []}
+{"seq": 2, "ts": "2026-10-01T16:16:35.802+00:00", "type": "session_started", "tenant": "acme-fcu", "profile": "acme-coreone@4", "cdp_endpoint": "http://127.0.0.1:55126", "operator_console": null}
+{"seq": 3, "ts": "2026-10-01T16:16:36.381+00:00", "type": "signed_on", "screen": "teller_home"}
+{"seq": 4, "ts": "2026-10-01T16:16:36.395+00:00", "type": "step_action", "index": 0, "step": "click_member_inquiry", "action": "click", "target": "teller_home.member_inquiry", "strategy": "role_name", "value_template": null, "risk": "safe"}
+{"seq": 5, "ts": "2026-10-01T16:16:36.681+00:00", "type": "step_completed", "index": 0, "step": "click_member_inquiry"}
+{"seq": 6, "ts": "2026-10-01T16:16:36.698+00:00", "type": "step_action", "index": 1, "step": "enter_member_number", "action": "fill", "target": "member_inquiry.member_number", "strategy": "role_label", "value_template": "{{inputs.member_number}}", "risk": "safe"}
+{"seq": 7, "ts": "2026-10-01T16:16:36.781+00:00", "type": "step_completed", "index": 1, "step": "enter_member_number"}
+{"seq": 8, "ts": "2026-10-01T16:16:36.795+00:00", "type": "step_action", "index": 2, "step": "click_inquire", "action": "click", "target": "member_inquiry.inquire", "strategy": "role_name", "value_template": null, "risk": "safe"}
+{"seq": 9, "ts": "2026-10-01T16:16:37.040+00:00", "type": "recovery_started", "step": "click_inquire", "interstitial": "system_notice", "handler": "act", "attempt": 1}
+{"seq": 10, "ts": "2026-10-01T16:16:37.292+00:00", "type": "recovery_succeeded", "step": "click_inquire", "interstitial": "system_notice", "handler": "act", "attempt": 1, "ok": true}
+{"seq": 11, "ts": "2026-10-01T16:16:37.296+00:00", "type": "repositioned", "why": "recovery", "from_step": "click_inquire", "to_step": "click_shares", "screen": "member_detail"}
+{"seq": 12, "ts": "2026-10-01T16:16:37.312+00:00", "type": "step_action", "index": 3, "step": "click_shares", "action": "click", "target": "member_detail.shares", "strategy": "role_name", "value_template": null, "risk": "safe"}
+{"seq": 13, "ts": "2026-10-01T16:16:37.550+00:00", "type": "step_completed", "index": 3, "step": "click_shares"}
+{"seq": 14, "ts": "2026-10-01T16:16:37.572+00:00", "type": "step_action", "index": 4, "step": "read_savings_balance", "action": "extract", "target": "member_shares.savings_balance", "strategy": "table_cell", "value_template": null, "risk": "safe"}
+{"seq": 15, "ts": "2026-10-01T16:16:37.592+00:00", "type": "step_completed", "index": 4, "step": "read_savings_balance"}
+{"seq": 16, "ts": "2026-10-01T16:16:37.596+00:00", "type": "success_checkpoint_passed", "conditions": [{"kind": "screen", "screen": "member_shares"}]}
+{"seq": 17, "ts": "2026-10-01T16:16:37.597+00:00", "type": "replay_finished", "status": "succeeded", "outcome": null, "failure": null, "outputs": {"savings_balance": "\u00absavings_balance\u00bb"}, "recoveries": 1, "drift": 0, "duration_ms": 2625}

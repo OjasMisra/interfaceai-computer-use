@@ -1,0 +1,473 @@
+{
+  "schema": "cua.capability/v1",
+  "id": "member.open_share",
+  "version": "1.0.0",
+  "title": "Open a new share (sub-account) for a member",
+  "description": "Opens a share of the given type with an opening deposit and returns the confirmation number. Posts a transaction.",
+  "status": "approved",
+  "app": {
+    "profile": "acme-coreone",
+    "profile_version": "4",
+    "surface": "web",
+    "start_screen": "teller_home"
+  },
+  "inputs": [
+    {
+      "name": "member_number",
+      "type": "string",
+      "description": "Member (account holder) number",
+      "required": true,
+      "pattern": "\\d{5,9}",
+      "sensitivity": "pii"
+    },
+    {
+      "name": "opening_deposit",
+      "type": "decimal",
+      "description": "Opening deposit amount in USD",
+      "required": true,
+      "minimum": "0.01",
+      "sensitivity": "pii"
+    },
+    {
+      "name": "share_type",
+      "type": "enum",
+      "description": "Type of share to open",
+      "required": true,
+      "enum": [
+        "SAVINGS",
+        "CLUB",
+        "CERTIFICATE"
+      ],
+      "sensitivity": "internal"
+    }
+  ],
+  "outputs": [
+    {
+      "name": "confirmation_number",
+      "type": "string",
+      "description": "Host confirmation number",
+      "required": true,
+      "sensitivity": "internal"
+    },
+    {
+      "name": "share_id",
+      "type": "string",
+      "description": "Id of the newly opened share",
+      "required": true,
+      "sensitivity": "internal"
+    }
+  ],
+  "secrets": [],
+  "outcomes": [
+    {
+      "code": "MEMBER_NOT_FOUND",
+      "description": "No member exists with that number",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "NO RECORD FOUND FOR MEMBER"
+    },
+    {
+      "code": "INVALID_MEMBER_NUMBER",
+      "description": "Host rejected the member number format",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "INVALID MEMBER NUMBER"
+    },
+    {
+      "code": "ACCESS_RESTRICTED",
+      "description": "Restricted (e.g. employee) account; needs supervisor override",
+      "screens": [
+        "member_inquiry"
+      ],
+      "regex": "ACCESS DENIED - RESTRICTED ACCOUNT"
+    },
+    {
+      "code": "MINIMUM_DEPOSIT_NOT_MET",
+      "description": "Opening deposit below the product minimum",
+      "screens": [
+        "open_share"
+      ],
+      "regex": "MINIMUM OPENING DEPOSIT IS"
+    }
+  ],
+  "screens": [],
+  "steps": [
+    {
+      "id": "click_member_inquiry",
+      "intent": "Click the 'Member Inquiry' link",
+      "screen": "teller_home",
+      "action": "click",
+      "target": {
+        "key": "teller_home.member_inquiry",
+        "frame": [
+          "menu"
+        ],
+        "strategies": [
+          {
+            "kind": "role_name",
+            "role": "link",
+            "name": "Member Inquiry",
+            "why": "accessible name; what an operator reads, stable across layout changes"
+          },
+          {
+            "kind": "attribute",
+            "role": "link",
+            "attr": "href",
+            "value": "/work/inquiry",
+            "why": "canonical route with record ids parameterised"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > table > tbody > tr:nth-of-type(2) > td > a",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "screen",
+          "screen": "member_inquiry"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "enter_member_number",
+      "intent": "Enter {{inputs.member_number}} in 'Member Number'",
+      "screen": "member_inquiry",
+      "action": "fill",
+      "target": {
+        "key": "member_inquiry.member_number",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_label",
+            "role": "textbox",
+            "label": "Member Number",
+            "why": "no accessible name (table layout); label is the text in the adjacent cell"
+          },
+          {
+            "kind": "attribute",
+            "role": "textbox",
+            "attr": "name",
+            "value": "f_0012",
+            "why": "server-generated field name: opaque but fixed per product version"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > form > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2) > input",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "value": "{{inputs.member_number}}",
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "field_equals",
+          "value": "{{inputs.member_number}}"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "click_inquire",
+      "intent": "Click the 'Inquire' button",
+      "screen": "member_inquiry",
+      "action": "click",
+      "target": {
+        "key": "member_inquiry.inquire",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_name",
+            "role": "button",
+            "name": "Inquire",
+            "why": "accessible name; what an operator reads, stable across layout changes"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > form > table > tbody > tr:nth-of-type(3) > td:nth-of-type(2) > input:nth-of-type(1)",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "screen",
+          "screen": "member_detail"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "click_open_share",
+      "intent": "Click the 'Open Share' link",
+      "screen": "member_detail",
+      "action": "click",
+      "target": {
+        "key": "member_detail.open_share",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_name",
+            "role": "link",
+            "name": "Open Share",
+            "why": "accessible name; what an operator reads, stable across layout changes"
+          },
+          {
+            "kind": "attribute",
+            "role": "link",
+            "attr": "href",
+            "value": "/work/member/{{inputs.member_number}}/open-share",
+            "why": "canonical route with record ids parameterised"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > a:nth-of-type(3)",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "screen",
+          "screen": "open_share"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "choose_share_type",
+      "intent": "Choose {{inputs.share_type}} in 'Share Type'",
+      "screen": "open_share",
+      "action": "select",
+      "target": {
+        "key": "open_share.share_type",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_label",
+            "role": "combobox",
+            "label": "Share Type",
+            "why": "no accessible name (table layout); label is the text in the adjacent cell"
+          },
+          {
+            "kind": "attribute",
+            "role": "combobox",
+            "attr": "name",
+            "value": "f_0201",
+            "why": "server-generated field name: opaque but fixed per product version"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > form > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2) > select",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "value": "{{inputs.share_type}}",
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "field_equals",
+          "value": "{{inputs.share_type}}"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "enter_opening_deposit",
+      "intent": "Enter {{inputs.opening_deposit}} in 'Opening Deposit'",
+      "screen": "open_share",
+      "action": "fill",
+      "target": {
+        "key": "open_share.opening_deposit",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_label",
+            "role": "textbox",
+            "label": "Opening Deposit",
+            "why": "no accessible name (table layout); label is the text in the adjacent cell"
+          },
+          {
+            "kind": "attribute",
+            "role": "textbox",
+            "attr": "name",
+            "value": "f_0202",
+            "why": "server-generated field name: opaque but fixed per product version"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > form > table > tbody > tr:nth-of-type(2) > td:nth-of-type(2) > input",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "value": "{{inputs.opening_deposit}}",
+      "risk": "safe",
+      "expect": [
+        {
+          "kind": "field_equals",
+          "value": "{{inputs.opening_deposit}}"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "click_continue",
+      "intent": "Click the 'Continue' button",
+      "screen": "open_share",
+      "action": "click",
+      "target": {
+        "key": "open_share.continue",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_name",
+            "role": "button",
+            "name": "Continue",
+            "why": "accessible name; what an operator reads, stable across layout changes"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > form > table > tbody > tr:nth-of-type(4) > td:nth-of-type(2) > input",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "risk": "reversible",
+      "expect": [
+        {
+          "kind": "screen",
+          "screen": "verify_share"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "click_post",
+      "intent": "Click the 'Post' button",
+      "screen": "verify_share",
+      "action": "click",
+      "target": {
+        "key": "verify_share.post",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_name",
+            "role": "button",
+            "name": "Post",
+            "why": "accessible name; what an operator reads, stable across layout changes"
+          },
+          {
+            "kind": "css_path",
+            "css": "body > form > input:nth-of-type(1)",
+            "why": "structural fallback for actions; mainly a drift signal"
+          }
+        ]
+      },
+      "risk": "irreversible",
+      "expect": [
+        {
+          "kind": "screen",
+          "screen": "share_opened"
+        }
+      ],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "read_confirmation_number",
+      "intent": "Read confirmation_number from 'Confirmation No'",
+      "screen": "share_opened",
+      "action": "extract",
+      "target": {
+        "key": "share_opened.confirmation_number",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_label",
+            "role": "cell",
+            "label": "Confirmation No",
+            "why": "no accessible name (table layout); label is the text in the adjacent cell"
+          }
+        ]
+      },
+      "output": "confirmation_number",
+      "risk": "safe",
+      "expect": [],
+      "timeout_ms": 10000
+    },
+    {
+      "id": "read_share_id",
+      "intent": "Read share_id from 'Share'",
+      "screen": "share_opened",
+      "action": "extract",
+      "target": {
+        "key": "share_opened.share_id",
+        "frame": [
+          "work"
+        ],
+        "strategies": [
+          {
+            "kind": "role_label",
+            "role": "cell",
+            "label": "Share",
+            "why": "no accessible name (table layout); label is the text in the adjacent cell"
+          }
+        ]
+      },
+      "output": "share_id",
+      "risk": "safe",
+      "expect": [],
+      "timeout_ms": 10000
+    }
+  ],
+  "success": [
+    {
+      "kind": "screen",
+      "screen": "share_opened"
+    }
+  ],
+  "provenance": {
+    "discovery_run_id": "discovery-20261001T161613Z-3216",
+    "goal": "Open a new savings share for member «member_number» with an opening deposit of $«opening_deposit» and get the confirmation number",
+    "planner": "mock-heuristic-planner/1",
+    "recorded_at": "2026-10-01T16:16:19.627318Z",
+    "recorded_on_tenant": "acme-fcu",
+    "compiler": "cua-compiler/1",
+    "notes": [
+      "step click_post: irreversible; approved during discovery by sim-operator (scripted)"
+    ]
+  },
+  "approvals": [
+    {
+      "by": "demo reviewer",
+      "at": "2026-10-01T16:16:20.035686Z",
+      "content_sha256": "0ed99fd6fc9c74861d30a3dc9d1f464d10e85be906f4b00ea0c8bc12388ba9b7",
+      "note": "Reviewed steps, targets, risk and outcomes"
+    }
+  ]
+}

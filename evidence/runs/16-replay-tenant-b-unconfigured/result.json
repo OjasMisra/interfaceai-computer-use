@@ -1,0 +1,30 @@
+{
+  "run_id": "replay-20261001T161723Z-8b75",
+  "capability": "member.lookup_savings_balance@1.0.0",
+  "tenant": "harbor-cu-unconfigured",
+  "status": "succeeded",
+  "outputs": {
+    "savings_balance": "\u00absavings_balance\u00bb"
+  },
+  "outcome": null,
+  "failure": null,
+  "recoveries": [],
+  "interventions": [],
+  "drift": [
+    {
+      "step": "enter_member_number",
+      "target": "member_inquiry.member_number",
+      "warning": "member_inquiry.member_number: primary strategy role_label failed; matched by fallback #1 attribute"
+    },
+    {
+      "step": "click_shares",
+      "target": "member_detail.shares",
+      "warning": "member_detail.shares: primary strategy role_name failed; matched by fallback #1 attribute"
+    }
+  ],
+  "overrides_applied": [],
+  "human_assisted": false,
+  "steps_completed": 5,
+  "duration_ms": 2405,
+  "evidence_dir": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161723Z-8b75"
+}

@@ -1,0 +1,36 @@
+{
+  "run_id": null,
+  "capability": "member.lookup_savings_balance@1.0.0",
+  "tenant": "acme-fcu",
+  "status": "rejected",
+  "outputs": {},
+  "outcome": null,
+  "failure": {
+    "code": "INPUT_INVALID",
+    "message": "member_number: does not match \\d{5,9}",
+    "step_id": null,
+    "step_index": null,
+    "step_intent": null,
+    "expected": {
+      "member_number": {
+        "name": "member_number",
+        "type": "string",
+        "description": "Member (account holder) number",
+        "required": true,
+        "pattern": "\\d{5,9}",
+        "sensitivity": "pii"
+      }
+    },
+    "observed": null,
+    "retryable": false,
+    "evidence": []
+  },
+  "recoveries": [],
+  "interventions": [],
+  "drift": [],
+  "overrides_applied": [],
+  "human_assisted": false,
+  "steps_completed": 0,
+  "duration_ms": 0,
+  "evidence_dir": null
+}

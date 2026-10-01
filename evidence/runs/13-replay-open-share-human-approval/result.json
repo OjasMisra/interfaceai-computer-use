@@ -1,0 +1,29 @@
+{
+  "run_id": "replay-20261001T161710Z-da64",
+  "capability": "member.open_share@1.0.0",
+  "tenant": "acme-fcu",
+  "status": "succeeded",
+  "outputs": {
+    "confirmation_number": "\u00abconfirmation_number\u00bb",
+    "share_id": "\u00abshare_id\u00bb"
+  },
+  "outcome": null,
+  "failure": null,
+  "recoveries": [],
+  "interventions": [
+    {
+      "id": "iv-570030",
+      "kind": "approval",
+      "decision": "approve",
+      "by": "sim-operator (scripted)",
+      "note": "Reviewed member, share type and deposit on the verify screen. Approved.",
+      "human_actions": []
+    }
+  ],
+  "drift": [],
+  "overrides_applied": [],
+  "human_assisted": true,
+  "steps_completed": 10,
+  "duration_ms": 5469,
+  "evidence_dir": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161710Z-da64"
+}

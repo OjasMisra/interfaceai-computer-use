@@ -1,0 +1,344 @@
+{
+  "frames": [
+    {
+      "path": [
+        "banner"
+      ],
+      "url": "/banner",
+      "title": "CoreOne Teller",
+      "text": [
+        "ACME FEDERAL CREDIT UNION COREONE TELLER 4.2"
+      ],
+      "elements": []
+    },
+    {
+      "path": [
+        "menu"
+      ],
+      "url": "/menu",
+      "title": "CoreOne Teller",
+      "text": [
+        "FUNCTIONS",
+        "Member Inquiry",
+        "Teller Home",
+        "Transactions",
+        "Sign Off"
+      ],
+      "elements": [
+        {
+          "ref": "menu:0",
+          "role": "cell",
+          "name": "FUNCTIONS",
+          "label": "",
+          "tag": "td",
+          "attrs": {},
+          "css": "body > table > tbody > tr:nth-of-type(1) > td",
+          "enabled": true,
+          "blocked": false,
+          "table": {
+            "index": 0,
+            "row": 0,
+            "col": 0,
+            "header": null,
+            "headers": [
+              "FUNCTIONS"
+            ],
+            "row_values": null
+          }
+        },
+        {
+          "ref": "menu:1",
+          "role": "link",
+          "name": "Member Inquiry",
+          "label": "",
+          "tag": "a",
+          "attrs": {
+            "href": "/work/inquiry"
+          },
+          "css": "body > table > tbody > tr:nth-of-type(2) > td > a",
+          "enabled": true,
+          "blocked": false
+        },
+        {
+          "ref": "menu:2",
+          "role": "link",
+          "name": "Teller Home",
+          "label": "",
+          "tag": "a",
+          "attrs": {
+            "href": "/work/home"
+          },
+          "css": "body > table > tbody > tr:nth-of-type(3) > td > a",
+          "enabled": true,
+          "blocked": false
+        },
+        {
+          "ref": "menu:3",
+          "role": "cell",
+          "name": "Transactions",
+          "label": "",
+          "tag": "td",
+          "attrs": {},
+          "css": "body > table > tbody > tr:nth-of-type(4) > td",
+          "enabled": true,
+          "blocked": false,
+          "table": {
+            "index": 0,
+            "row": 3,
+            "col": 0,
+            "header": "FUNCTIONS",
+            "headers": [
+              "FUNCTIONS"
+            ],
+            "row_values": [
+              "Transactions"
+            ]
+          }
+        },
+        {
+          "ref": "menu:4",
+          "role": "link",
+          "name": "Sign Off",
+          "label": "",
+          "tag": "a",
+          "attrs": {
+            "href": "/signoff"
+          },
+          "css": "body > table > tbody > tr:nth-of-type(5) > td > a",
+          "enabled": true,
+          "blocked": false
+        }
+      ]
+    },
+    {
+      "path": [
+        "work"
+      ],
+      "url": "/work/member/\u00abmember_number\u00bb/open-share",
+      "title": "CoreOne Teller",
+      "text": [
+        "OPEN NEW SHARE OPR \u00absecret:operator_id\u00bb",
+        "Summary | Shares | Loans | Open Share",
+        "Share Type",
+        "--",
+        "\u00abshare_type\u00bb",
+        "CLUB",
+        "CERTIFICATE",
+        "Opening Deposit",
+        "Nickname"
+      ],
+      "elements": [
+        {
+          "ref": "work:0",
+          "role": "cell",
+          "name": "OPEN NEW SHARE",
+          "label": "",
+          "tag": "td",
+          "attrs": {},
+          "css": "body > table > tbody > tr > td:nth-of-type(1)",
+          "enabled": true,
+          "blocked": false,
+          "table": {
+            "index": 0,
+            "row": 0,
+            "col": 0,
+            "header": null,
+            "headers": null,
+            "row_values": null
+          }
+        },
+        {
+          "ref": "work:1",
+          "role": "cell",
+          "name": "OPR \u00absecret:operator_id\u00bb",
+          "label": "OPEN NEW SHARE",
+          "tag": "td",
+          "attrs": {},
+          "css": "body > table > tbody > tr > td:nth-of-type(2)",
+          "enabled": true,
+          "blocked": false,
+          "table": {
+            "index": 0,
+            "row": 0,
+            "col": 1,
+            "header": null,
+            "headers": null,
+            "row_values": null
+          }
+        },
+        {
+          "ref": "work:2",
+          "role": "link",
+          "name": "Summary",
+          "label": "",
+          "tag": "a",
+          "attrs": {
+            "href": "/work/member/\u00abmember_number\u00bb"
+          },
+          "css": "body > a:nth-of-type(1)",
+          "enabled": true,
+          "blocked": false
+        },
+        {
+          "ref": "work:3",
+          "role": "link",
+          "name": "Shares",
+          "label": "",
+          "tag": "a",
+          "attrs": {
+            "href": "/work/member/\u00abmember_number\u00bb/shares"
+          },
+          "css": "body > a:nth-of-type(2)",
+          "enabled": true,
+          "blocked": false
+        },
+        {
+          "ref": "work:4",
+          "role": "link",
+          "name": "Open Share",
+          "label": "",
+          "tag": "a",
+          "attrs": {
+            "href": "/work/member/\u00abmember_number\u00bb/open-share"
+          },
+          "css": "body > a:nth-of-type(3)",
+          "enabled": true,
+          "blocked": false
+        },
+        {
+          "ref": "work:5",
+          "role": "cell",
+          "name": "Share Type",
+          "label": "",
+          "tag": "td",
+          "attrs": {},
+          "css": "body > form > table > tbody > tr:nth-of-type(1) > td:nth-of-type(1)",
+          "enabled": true,
+          "blocked": false,
+          "table": {
+            "index": 1,
+            "row": 0,
+            "col": 0,
+            "header": null,
+            "headers": null,
+            "row_values": null
+          }
+        },
+        {
+          "ref": "work:6",
+          "role": "combobox",
+          "name": "",
+          "label": "Share Type",
+          "tag": "select",
+          "attrs": {
+            "name": "f_0201"
+          },
+          "css": "body > form > table > tbody > tr:nth-of-type(1) > td:nth-of-type(2) > select",
+          "enabled": true,
+          "blocked": false,
+          "value": "\u00abshare_type\u00bb",
+          "options": [
+            "--",
+            "\u00abshare_type\u00bb",
+            "CLUB",
+            "CERTIFICATE"
+          ]
+        },
+        {
+          "ref": "work:7",
+          "role": "cell",
+          "name": "Opening Deposit",
+          "label": "",
+          "tag": "td",
+          "attrs": {},
+          "css": "body > form > table > tbody > tr:nth-of-type(2) > td:nth-of-type(1)",
+          "enabled": true,
+          "blocked": false,
+          "table": {
+            "index": 1,
+            "row": 1,
+            "col": 0,
+            "header": null,
+            "headers": null,
+            "row_values": null
+          }
+        },
+        {
+          "ref": "work:8",
+          "role": "textbox",
+          "name": "",
+          "label": "Opening Deposit",
+          "tag": "input",
+          "attrs": {
+            "name": "f_0202",
+            "type": "text"
+          },
+          "css": "body > form > table > tbody > tr:nth-of-type(2) > td:nth-of-type(2) > input",
+          "enabled": true,
+          "blocked": false,
+          "value": ""
+        },
+        {
+          "ref": "work:9",
+          "role": "cell",
+          "name": "Nickname",
+          "label": "",
+          "tag": "td",
+          "attrs": {},
+          "css": "body > form > table > tbody > tr:nth-of-type(3) > td:nth-of-type(1)",
+          "enabled": true,
+          "blocked": false,
+          "table": {
+            "index": 1,
+            "row": 2,
+            "col": 0,
+            "header": null,
+            "headers": null,
+            "row_values": null
+          }
+        },
+        {
+          "ref": "work:10",
+          "role": "textbox",
+          "name": "",
+          "label": "Nickname",
+          "tag": "input",
+          "attrs": {
+            "name": "f_0203",
+            "type": "text"
+          },
+          "css": "body > form > table > tbody > tr:nth-of-type(3) > td:nth-of-type(2) > input",
+          "enabled": true,
+          "blocked": false,
+          "value": ""
+        },
+        {
+          "ref": "work:11",
+          "role": "button",
+          "name": "Continue",
+          "label": "",
+          "tag": "input",
+          "attrs": {
+            "type": "submit",
+            "value": "Continue"
+          },
+          "css": "body > form > table > tbody > tr:nth-of-type(4) > td:nth-of-type(2) > input",
+          "enabled": true,
+          "blocked": false
+        }
+      ]
+    }
+  ],
+  "primary_text": [
+    "OPEN NEW SHARE OPR \u00absecret:operator_id\u00bb",
+    "Summary | Shares | Loans | Open Share",
+    "Share Type",
+    "--",
+    "\u00abshare_type\u00bb",
+    "CLUB",
+    "CERTIFICATE",
+    "Opening Deposit",
+    "Nickname"
+  ],
+  "url": "http://127.0.0.1:5055/desk"
+}

@@ -1,0 +1,27 @@
+{
+  "run_id": "replay-20261001T161634Z-255b",
+  "capability": "member.lookup_savings_balance@1.0.0",
+  "tenant": "acme-fcu",
+  "status": "succeeded",
+  "outputs": {
+    "savings_balance": "\u00absavings_balance\u00bb"
+  },
+  "outcome": null,
+  "failure": null,
+  "recoveries": [
+    {
+      "step": "click_inquire",
+      "interstitial": "system_notice",
+      "handler": "act",
+      "attempt": 1,
+      "ok": true
+    }
+  ],
+  "interventions": [],
+  "drift": [],
+  "overrides_applied": [],
+  "human_assisted": false,
+  "steps_completed": 5,
+  "duration_ms": 2625,
+  "evidence_dir": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161634Z-255b"
+}

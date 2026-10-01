@@ -1,0 +1,54 @@
+{
+  "id": "iv-03fbee",
+  "run_id": "replay-20261001T161640Z-4fab",
+  "kind": "unexpected_state",
+  "reason": "step click_inquire: unrecognised state",
+  "context": {
+    "capability": "member.lookup_savings_balance@1.0.0",
+    "tenant": "acme-fcu",
+    "step_index": 2,
+    "step": "click_inquire",
+    "intent": "Click the 'Inquire' button",
+    "expected": {
+      "screen": "member_detail"
+    },
+    "observed": {
+      "kind": "unknown",
+      "screen": null,
+      "interstitial": null,
+      "error": null,
+      "outcome": null,
+      "headline": [
+        "SECURITY VERIFICATION OPR \u00absecret:operator_id\u00bb",
+        "VERIFY MEMBER IDENTITY BEFORE VIEWING ACCOUNT DETAILS.",
+        "ASK THE MEMBER FOR THEIR SECURITY WORD AND CONFIRM IT MATCHES THE CARD ON FILE."
+      ]
+    }
+  },
+  "screenshot": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161640Z-4fab\\evidence\\01-escalation-unexpected_state.png",
+  "snapshot": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161640Z-4fab\\evidence\\01-escalation-unexpected_state.snapshot.json",
+  "cdp_endpoint": "http://127.0.0.1:65334",
+  "allowed_decisions": [
+    "resume",
+    "abort"
+  ],
+  "status": "resolved",
+  "created_at": "2026-10-01T16:16:52.753906Z",
+  "claimed_by": "sim-operator (scripted)",
+  "claimed_at": "2026-10-01T16:16:54.785090Z",
+  "decision": "resume",
+  "note": "Verified member identity by phone; continued past security screen.",
+  "resolved_at": "2026-10-01T16:16:56.986423Z",
+  "human_actions": [
+    {
+      "at": "2026-10-01T16:16:55.712+00:00",
+      "by": "sim-operator (scripted)",
+      "kind": "click",
+      "frame": "work",
+      "tag": "input",
+      "field": null,
+      "label": "",
+      "name": "Identity Verified"
+    }
+  ]
+}

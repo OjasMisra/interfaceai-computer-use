@@ -1,0 +1,42 @@
+{
+  "id": "iv-570030",
+  "run_id": "replay-20261001T161710Z-da64",
+  "kind": "approval",
+  "reason": "step 'click_post' is irreversible: Click the 'Post' button",
+  "context": {
+    "capability": "member.open_share@1.0.0",
+    "tenant": "acme-fcu",
+    "step_index": 7,
+    "step": "click_post",
+    "intent": "Click the 'Post' button",
+    "expected": null,
+    "observed": {
+      "kind": "screen",
+      "screen": "verify_share",
+      "interstitial": null,
+      "error": null,
+      "outcome": null,
+      "headline": [
+        "VERIFY NEW SHARE OPR \u00absecret:operator_id\u00bb",
+        "PLEASE VERIFY THE FOLLOWING BEFORE POSTING.",
+        "Member \u00abmember_number\u00bb"
+      ]
+    }
+  },
+  "screenshot": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161710Z-da64\\evidence\\01-escalation-approval.png",
+  "snapshot": "C:\\Users\\misra\\cua-bank-automation\\runs\\replay-20261001T161710Z-da64\\evidence\\01-escalation-approval.snapshot.json",
+  "cdp_endpoint": "http://127.0.0.1:52946",
+  "allowed_decisions": [
+    "approve",
+    "resume",
+    "abort"
+  ],
+  "status": "resolved",
+  "created_at": "2026-10-01T16:17:13.916545Z",
+  "claimed_by": "sim-operator (scripted)",
+  "claimed_at": "2026-10-01T16:17:15.931398Z",
+  "decision": "approve",
+  "note": "Reviewed member, share type and deposit on the verify screen. Approved.",
+  "resolved_at": "2026-10-01T16:17:15.945411Z",
+  "human_actions": []
+}

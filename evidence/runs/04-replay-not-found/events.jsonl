@@ -1,0 +1,11 @@
+{"seq": 1, "ts": "2026-10-01T16:16:22.644+00:00", "type": "replay_started", "capability": "member.lookup_savings_balance@1.0.0", "status": "approved", "tenant": "acme-fcu", "inputs": {"member_number": "\u00abmember_number\u00bb"}, "overrides": [], "preapproved": []}
+{"seq": 2, "ts": "2026-10-01T16:16:23.487+00:00", "type": "session_started", "tenant": "acme-fcu", "profile": "acme-coreone@4", "cdp_endpoint": "http://127.0.0.1:59581", "operator_console": null}
+{"seq": 3, "ts": "2026-10-01T16:16:24.068+00:00", "type": "signed_on", "screen": "teller_home"}
+{"seq": 4, "ts": "2026-10-01T16:16:24.086+00:00", "type": "step_action", "index": 0, "step": "click_member_inquiry", "action": "click", "target": "teller_home.member_inquiry", "strategy": "role_name", "value_template": null, "risk": "safe"}
+{"seq": 5, "ts": "2026-10-01T16:16:24.383+00:00", "type": "step_completed", "index": 0, "step": "click_member_inquiry"}
+{"seq": 6, "ts": "2026-10-01T16:16:24.400+00:00", "type": "step_action", "index": 1, "step": "enter_member_number", "action": "fill", "target": "member_inquiry.member_number", "strategy": "role_label", "value_template": "{{inputs.member_number}}", "risk": "safe"}
+{"seq": 7, "ts": "2026-10-01T16:16:24.458+00:00", "type": "step_completed", "index": 1, "step": "enter_member_number"}
+{"seq": 8, "ts": "2026-10-01T16:16:24.471+00:00", "type": "step_action", "index": 2, "step": "click_inquire", "action": "click", "target": "member_inquiry.inquire", "strategy": "role_name", "value_template": null, "risk": "safe"}
+{"seq": 9, "ts": "2026-10-01T16:16:24.698+00:00", "type": "business_outcome", "code": "MEMBER_NOT_FOUND", "message": "NO RECORD FOUND FOR MEMBER \u00abmember_number\u00bb", "step": "click_inquire"}
+{"seq": 10, "ts": "2026-10-01T16:16:24.882+00:00", "type": "evidence_captured", "tag": "outcome-member_not_found", "screenshot": "evidence\\01-outcome-member_not_found.png", "snapshot": "evidence\\01-outcome-member_not_found.snapshot.json"}
+{"seq": 11, "ts": "2026-10-01T16:16:24.883+00:00", "type": "replay_finished", "status": "business_outcome", "outcome": {"code": "MEMBER_NOT_FOUND", "description": "No member exists with that number", "message": "NO RECORD FOUND FOR MEMBER \u00abmember_number\u00bb"}, "failure": null, "outputs": {}, "recoveries": 0, "drift": 0, "duration_ms": 2250}
